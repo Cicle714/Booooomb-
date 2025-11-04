@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
             roteZ -= Time.deltaTime * rotationPow;
         }
 
-        rb.AddForce(new Vector2(Mathf.Sin(roteZ / 180.0f * Mathf.PI) , (-Mathf.Cos((roteZ / 180.0f) * Mathf.PI))));
+        rb.AddForce(new Vector2(Mathf.Sin(roteZ / 180.0f * Mathf.PI)*GravityPow, (-Mathf.Cos((roteZ / 180.0f) * Mathf.PI)*GravityPow)));
 
         debugX = Mathf.Sin(roteZ / 90.0f * Mathf.PI);
         debugY = (-Mathf.Cos((roteZ / 90.0f) * Mathf.PI));
