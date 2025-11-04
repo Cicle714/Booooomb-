@@ -7,22 +7,31 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
 
     [SerializeField]
-    private GameObject Object;
+    private GameObject PlayerObject;
+    [SerializeField] 
+    private GameObject CameraObject;
 
     [SerializeField]
     private GameObject Ribbon;
 
+    [SerializeField]
     private float roteZ;
 
     [SerializeField]
     private float rotationPow;
 
+    [SerializeField]
     private float GravityPow;
 
     [SerializeField]
     private float GravityMaxY;
     [SerializeField]
     private float GravityMaxX;
+
+    [SerializeField]
+    float debugX;
+    [SerializeField]
+    private float debugY;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -43,15 +52,24 @@ public class Player : MonoBehaviour
         {
             roteZ -= Time.deltaTime * rotationPow;
         }
-        rb.AddForce(new Vector2(Mathf.Sin(roteZ / 90.0f),-Mathf.Cos(roteZ / 90.0f)));
 
-        if(rb.linearVelocityX > GravityMaxX )
+        rb.AddForce(new Vector2(Mathf.Sin(roteZ / 180.0f * Mathf.PI) , (-Mathf.Cos((roteZ / 180.0f) * Mathf.PI))));
+
+        debugX = Mathf.Sin(roteZ / 90.0f * Mathf.PI);
+        debugY = (-Mathf.Cos((roteZ / 90.0f) * Mathf.PI));
+
+
+        if (rb.linearVelocityX > GravityMaxX )
             rb.linearVelocityX = GravityMaxX;
-        if(rb.linearVelocityY > GravityMaxY ) 
+        if (-rb.linearVelocityX < -GravityMaxX)
+            rb.linearVelocityX = -GravityMaxX;
+        if (rb.linearVelocityY > GravityMaxY ) 
             rb.linearVelocityY = GravityMaxY;
+        if (-rb.linearVelocityY < -GravityMaxY)
+            rb.linearVelocityY = -GravityMaxY;
 
 
-        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, roteZ);
-        Ribbon.transform.rotation = Quaternion.Euler(0,0,transform.rotation.z);
+        CameraObject.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, roteZ);
+        CameraObject.transform.position = new Vector3(transform.position.x,transform.position.y,-10);
     }
 }
