@@ -10,6 +10,7 @@ public class Goal : MonoBehaviour
         if (collision.gameObject.GetComponent<Player>())
         {
             gameManager.clear = true;
+            gameManager.gameOver = true;
         }
     }
 
@@ -22,6 +23,9 @@ public class Goal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Rotate(0, 360 * Time.deltaTime, 0);
+        if(gameManager.gameOver) {
+            Destroy(gameObject);
+        }
     }
 }

@@ -39,11 +39,11 @@ public class Player : MonoBehaviour
         //方向キー入力で回転
         if(Input.GetKey(KeyCode.A) || (Input.GetKey(KeyCode.LeftArrow)))
         {
-            roteZ += Time.deltaTime * rotationPow;
+            roteZ -= Time.deltaTime * rotationPow;
         }
         if (Input.GetKey(KeyCode.D) || (Input.GetKey(KeyCode.RightArrow)))
         {
-            roteZ -= Time.deltaTime * rotationPow;
+            roteZ += Time.deltaTime * rotationPow;
         }
 
         //重力の計算

@@ -12,7 +12,8 @@ public class MapMaker : MonoBehaviour
     private GameObject Block1;　//ブロック
     [SerializeField]
     private List<GameObject> Arrow;
-
+    [SerializeField]
+    private GameObject ClearObject;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,6 +50,9 @@ public class MapMaker : MonoBehaviour
                         break;
                     case 5:
                         Instantiate(Arrow[3], transform.position + ObjPos(j, i), Quaternion.identity);
+                        break;
+                    case 6:
+                        Instantiate(ClearObject, transform.position + ObjPos(j, i), Quaternion.identity);
                         break;
                 }
                 
