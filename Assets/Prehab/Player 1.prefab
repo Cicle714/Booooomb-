@@ -256,6 +256,6 @@ MonoBehaviour:
   PlayerObject: {fileID: 0}
   roteZ: 0
   rotationPow: 120
-  GravityPow: 5
+  GravityPow: 7.5
   GravityMaxY: 20
   GravityMaxX: 20

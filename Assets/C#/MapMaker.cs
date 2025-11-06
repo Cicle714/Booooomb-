@@ -1,8 +1,7 @@
-using System.IO;
-using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
-using UnityEngine.UI;
 using System.Collections.Generic;
+using System.IO;
+using Unity.VisualScripting.FullSerializer;
+using UnityEngine;
 
 public class MapMaker : MonoBehaviour
 {
@@ -18,9 +17,9 @@ public class MapMaker : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        string csvFile = "Map.csv";　//csvの名前
+        TextAsset csvFile = Resources.Load<TextAsset>("Map");//csvの名前
 
-        string[] lines = File.ReadAllLines(csvFile);　//ファイルの読み込み
+        string[] lines = csvFile.text.Split('\n');//ファイルの読み込み
 
         for (int i = 0; i < lines.Length; i++)
         {
@@ -32,15 +31,16 @@ public class MapMaker : MonoBehaviour
 
                 int.TryParse(values[j], out int num);　//文字の状態から数値に変換
 
-                switch (num) {
+                switch (num)
+                {
                     case 0:　//プレイヤー生成
                         Instantiate(PlayerObject, transform.position + ObjPos(j, i), Quaternion.identity);
-                    break;　
+                        break;
                     case 1: //ブロック生成
-                        Instantiate(Block1, transform.position + ObjPos(j,i), Quaternion.identity);
-                    break;
+                        Instantiate(Block1, transform.position + ObjPos(j, i), Quaternion.identity);
+                        break;
                     case 2:
-                        Instantiate(Arrow[0], transform.position + ObjPos(j,i),Quaternion.identity);
+                        Instantiate(Arrow[0], transform.position + ObjPos(j, i), Quaternion.identity);
                         break;
                     case 3:
                         Instantiate(Arrow[1], transform.position + ObjPos(j, i), Quaternion.identity);
@@ -55,25 +55,26 @@ public class MapMaker : MonoBehaviour
                         Instantiate(ClearObject, transform.position + ObjPos(j, i), Quaternion.identity);
                         break;
                 }
-                
+
 
             }
 
-           
-            
+
+
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    Vector3 ObjPos(int x,int y)
+    Vector3 ObjPos(int x, int y)
     {
         return new Vector2(x, y);
     }
+
     
 
 }

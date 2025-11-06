@@ -24,7 +24,8 @@ public class Goal : MonoBehaviour
     void Update()
     {
         transform.Rotate(0, 360 * Time.deltaTime, 0);
-        if(gameManager.gameOver) {
+        if (gameManager.gameOver)
+        {
             Destroy(gameObject);
         }
     }

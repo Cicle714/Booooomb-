@@ -1,10 +1,8 @@
-using TreeEditor;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Rigidbody2D rb; 
+    Rigidbody2D rb;
 
     [SerializeField]
     private GameObject PlayerObject; //プレイヤー
@@ -29,7 +27,7 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        CameraObject = FindObjectOfType<Camera>(); 
+        CameraObject = FindObjectOfType<Camera>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -37,7 +35,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //方向キー入力で回転
-        if(Input.GetKey(KeyCode.A) || (Input.GetKey(KeyCode.LeftArrow)))
+        if (Input.GetKey(KeyCode.A) || (Input.GetKey(KeyCode.LeftArrow)))
         {
             roteZ -= Time.deltaTime * rotationPow;
         }
@@ -47,22 +45,22 @@ public class Player : MonoBehaviour
         }
 
         //重力の計算
-        rb.AddForce(new Vector2(Mathf.Sin(roteZ / 180.0f * Mathf.PI)*GravityPow, (-Mathf.Cos((roteZ / 180.0f) * Mathf.PI)*GravityPow)));
+        rb.AddForce(new Vector2(Mathf.Sin(roteZ / 180.0f * Mathf.PI) * GravityPow, (-Mathf.Cos((roteZ / 180.0f) * Mathf.PI) * GravityPow)));
 
 
         //重力が最大値を超えないようにする
-        if (rb.linearVelocityX > GravityMaxX )
+        if (rb.linearVelocityX > GravityMaxX)
             rb.linearVelocityX = GravityMaxX;
         if (rb.linearVelocityX < -GravityMaxX)
             rb.linearVelocityX = -GravityMaxX;
 
-        if (rb.linearVelocityY > GravityMaxY ) 
+        if (rb.linearVelocityY > GravityMaxY)
             rb.linearVelocityY = GravityMaxY;
         if (rb.linearVelocityY < -GravityMaxY)
             rb.linearVelocityY = -GravityMaxY;
 
         //カメラを追従させ、回転させる
         CameraObject.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, roteZ);
-        CameraObject.transform.position = new Vector3(transform.position.x,transform.position.y,-10);
+        CameraObject.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
     }
 }

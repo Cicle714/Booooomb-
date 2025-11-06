@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int StageNum; //現在のステージ
     private bool GameOver = false; //ゲームの終了状態
-    public bool gameOver 
+    public bool gameOver
     {
         get { return GameOver; }
         set { GameOver = value; }
@@ -56,11 +56,11 @@ public class GameManager : MonoBehaviour
 
         if (!GameOver)
         {
-           CountDown -= Time.deltaTime; //制限時間のカウントダウン
-            
+            CountDown -= Time.deltaTime; //制限時間のカウントダウン
+
         }
 
-        if(GameOver)
+        if (GameOver)
         {
             if (Clear)
             {
@@ -71,10 +71,10 @@ public class GameManager : MonoBehaviour
                 gameOverText.gameObject.SetActive(true);    //失敗表示
             }
             GameOverCount += Time.deltaTime;
-            if(GameOverCount > BlackOutTime)
+            if (GameOverCount > BlackOutTime)
             {
                 BlackImage.color += new Color(0, 0, 0, 1 * Time.deltaTime / 2);　//暗転
-                if(BlackImage.color.a >= 1)
+                if (BlackImage.color.a >= 1)
                 {
                     SceneManager.LoadScene("Title");
                 }
@@ -82,8 +82,8 @@ public class GameManager : MonoBehaviour
 
 
         }
-            
-        if(CountDown <= 0)
+
+        if (CountDown <= 0)
         {
             CountDown = 0;
             GameOver = true;　//ゲーム終了
